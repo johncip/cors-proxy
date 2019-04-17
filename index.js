@@ -2,26 +2,35 @@ const http = require('http')
 const logger = require('heroku-logger')
 const httpProxy = require('http-proxy')
 
-const target = process.env.TARGET || 'http://localhost:9000'
-const proxy = httpProxy.createProxyServer({})
+function createProxy (target, auth) {
+  const proxy = httpProxy.createProxyServer({})
 
-proxy.on('proxyReq', (proxyReq, req, res, options) => {
-  proxyReq.setHeader('X-Special-Proxy-Header', 'foobar')
-})
-
-proxy.on('error', (err, req, res) => {
-  res.writeHead(500, {
-    'Content-Type': 'text/plain'
+  proxy.on('proxyReq', (proxyReq, req, res, options) => {
+    if (auth) {
+      proxyReq.setHeader('Authorization', `Basic ${auth}`)
+    }
   })
 
-  logger.error(err.toString())
-  res.end(err.toString())
-})
+  proxy.on('error', (err, req, res) => {
+    res.writeHead(500, {
+      'Content-Type': 'text/plain'
+    })
+
+    logger.error(err.toString())
+    res.end(err.toString())
+  })
+
+  return proxy
+}
+
+const port = process.env.PORT || 8080
+const target = process.env.TARGET || 'http://httpbin.org'
+const auth = process.env.AUTH_B64
+const proxy = createProxy(target, auth)
 
 const server = http.createServer((req, res) => {
   proxy.web(req, res, { target })
 })
 
-const port = process.env.PORT || 8080
-logger.info('Starting server', { port: port })
+logger.info('Starting server', { port })
 server.listen(port)
