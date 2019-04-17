@@ -1,7 +1,7 @@
 {
   "name": "cors-proxy",
   "version": "1.0.0",
-  "description": "",
+  "description": "proxy back end for simple API usage",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
