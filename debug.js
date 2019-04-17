@@ -9,6 +9,7 @@ const server = http.createServer((req, res) => {
   })
 
   res.write(`target: ${target}`)
+  res.write('\n')
   res.end(`port: ${port}`)
 })
 

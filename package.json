@@ -4,7 +4,7 @@
   "description": "proxy back end for simple API usage",
   "main": "index.js",
   "scripts": {
-    "start": "node test.js",
+    "start": "node debug.js",
     "lint": "eslint_d . --ext .js || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
