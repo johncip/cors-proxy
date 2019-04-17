@@ -1,0 +1,19 @@
+{
+  "name": "cors-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johncip/cors-proxy.git"
+  },
+  "author": "John Cipriano <johnmikecip@gmail.com> (https://github.com/johncip)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johncip/cors-proxy/issues"
+  },
+  "homepage": "https://github.com/johncip/cors-proxy#readme"
+}
