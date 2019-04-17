@@ -8,7 +8,8 @@ const server = http.createServer((req, res) => {
     'Content-Type': 'text/plain'
   })
 
-  res.end(`target: ${target}`)
+  res.write(`target: ${target}`)
+  res.end(`port: ${port}`)
 })
 
 const port = process.env.PORT || 8080
