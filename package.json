@@ -4,6 +4,7 @@
   "description": "proxy back end for simple API usage",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint_d . --ext .js || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/johncip/cors-proxy/issues"
   },
-  "homepage": "https://github.com/johncip/cors-proxy#readme"
+  "homepage": "https://github.com/johncip/cors-proxy#readme",
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint_d": "^7.3.0"
+  },
+  "dependencies": {}
 }
