@@ -2,7 +2,7 @@ const http = require('http')
 const logger = require('heroku-logger')
 const httpProxy = require('http-proxy')
 
-const targetHost = 'http://localhost:9000'
+const target = process.env.TARGET || 'http://localhost:9000'
 const proxy = httpProxy.createProxyServer({})
 
 proxy.on('proxyReq', (proxyReq, req, res, options) => {
@@ -19,7 +19,7 @@ proxy.on('error', (err, req, res) => {
 })
 
 const server = http.createServer((req, res) => {
-  proxy.web(req, res, { target: targetHost })
+  proxy.web(req, res, { target })
 })
 
 const port = process.env.PORT || 8080
