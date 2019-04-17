@@ -27,6 +27,7 @@
     "eslint_d": "^7.3.0"
   },
   "dependencies": {
+    "heroku-logger": "^0.3.3",
     "http-proxy": "^1.17.0"
   }
 }
