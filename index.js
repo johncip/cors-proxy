@@ -1,19 +1,26 @@
 const http = require('http')
 const logger = require('heroku-logger')
 const httpProxy = require('http-proxy')
+const util = require('util')
+
+function inspect (obj) {
+  console.log()
+  console.log(util.inspect(obj))
+  console.log()
+}
 
 function createProxy (target, auth) {
   const proxy = httpProxy.createProxyServer({})
 
-  proxy.on('proxyReq', (proxyReq) => {
+  proxy.on('proxyReq', proxyReq => {
     if (auth) {
       proxyReq.setHeader('Authorization', `Basic ${auth}`)
     }
   })
 
-  proxy.on('proxyRes', (proxyRes) => {
-    proxyRes.setHeader('Access-Control-Allow-Origin', '*')
-    proxyRes.setHeader(
+  proxy.on('proxyRes', (a, b, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept'
     )
