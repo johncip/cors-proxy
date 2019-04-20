@@ -5,10 +5,18 @@ const httpProxy = require('http-proxy')
 function createProxy (target, auth) {
   const proxy = httpProxy.createProxyServer({})
 
-  proxy.on('proxyReq', (proxyReq, req, res, options) => {
+  proxy.on('proxyReq', (proxyReq) => {
     if (auth) {
       proxyReq.setHeader('Authorization', `Basic ${auth}`)
     }
+  })
+
+  proxy.on('proxyRes', (proxyRes) => {
+    proxyRes.header('Access-Control-Allow-Origin', '*')
+    proxyRes.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    )
   })
 
   proxy.on('error', (err, req, res) => {
@@ -29,7 +37,7 @@ const auth = process.env.AUTH_B64
 const proxy = createProxy(target, auth)
 
 const server = http.createServer((req, res) => {
-  proxy.web(req, res, { target })
+  proxy.web(req, res, { target, changeOrigin: true })
 })
 
 logger.info('Starting server', { port })
