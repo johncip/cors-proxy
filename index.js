@@ -12,8 +12,8 @@ function createProxy (target, auth) {
   })
 
   proxy.on('proxyRes', (proxyRes) => {
-    proxyRes.header('Access-Control-Allow-Origin', '*')
-    proxyRes.header(
+    proxyRes.setHeader('Access-Control-Allow-Origin', '*')
+    proxyRes.setHeader(
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With, Content-Type, Accept'
     )
